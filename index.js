@@ -14,6 +14,10 @@ client.on("message", message => {
     if(checkOID != -1) {
         doBlacklist(message);
     }
+    if(blacklisted.includes(message.content)) {
+        try {message.delete();}
+        catch(e){}
+    }
 })
 
 function doBlacklist(message) {
@@ -35,12 +39,6 @@ function doBlacklist(message) {
         }
         else {
             blacklisted.push(blacklistedPhrase);
-        }
-    }
-    else {
-        if(blacklisted.includes(content)) {
-            try {message.delete();}
-            catch(e){}
         }
     }
     return;
